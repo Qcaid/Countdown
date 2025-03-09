@@ -18,7 +18,7 @@
 ## 安装指南
 ```bash
 # 克隆仓库
-git clone https://github.com/your-repo/countdown-app.git
+git clone https://github.com/Qcaid/Countdown.git
 
 # 安装依赖
 npm install
