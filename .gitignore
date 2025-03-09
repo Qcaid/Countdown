@@ -1,0 +1,38 @@
+# 依赖目录
+node_modules/
+
+# 构建产物
+.next/
+
+# IDE配置
+.vscode/
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 日志文件
+*.log
+
+# 调试文件
+*.pid
+*.seed
+
+# 包管理器文件
+package-lock.json
+
+# 系统文件
+.DS_Store
+
+# 测试相关
+coverage/
+.nyc_output/
+
+# 临时文件
+*.tmp
+*.temp
+
+# IDE生成文件
+*.sublime-workspace
+*.sublime-project
