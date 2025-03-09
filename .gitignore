@@ -3,6 +3,12 @@ node_modules/
 
 # 构建产物
 .next/
+out/
+src-tauri/target/
+
+# NSIS安装包缓存
+src-tauri/nsis/
+
 
 # IDE配置
 .vscode/
