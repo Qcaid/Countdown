@@ -1,6 +1,6 @@
 # 倒计时应用 - Days Matter
 
-![应用截图](https://via.placeholder.com/1280x720.png/2d2d2d/ffffff?text=Days+Matter+Demo)
+![应用截图](https://github.com/Qcaid/Countdown/blob/60e8cf1691f2bca41af0ae61ccb79d1f2bb904f5/demo/demoimg.png)
 
 ## 功能特性
 - 📅 创建/删除倒计时事件
