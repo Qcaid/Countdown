@@ -267,9 +267,12 @@ export default function Home() {
         {/* 分类选择器 */}
         <CategorySelector
           categories={categories}
+          events={countdowns}
+          setEvents={setCountdowns}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
           onAddCategory={addCategory}
+          setCategories={setCategories}
         />
 
         {/* 添加新倒计时表单 */}
