@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const CategorySelector = ({ categories, events, setEvents, selectedCategory, onSelectCategory, onAddCategory, setCategories }) => {
-  const [newCategory, setNewCategory] = useState('');
+const CategorySelector = ({
+  categories,
+  events,
+  setEvents,
+  selectedCategory,
+  onSelectCategory,
+  onAddCategory,
+  setCategories,
+}) => {
+  const [newCategory, setNewCategory] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddCategory = () => {
     if (newCategory.trim()) {
       onAddCategory(newCategory.trim());
-      setNewCategory('');
+      setNewCategory("");
       setIsAdding(false);
     }
   };
 
   const handleDeleteCategory = (categoryToDelete) => {
-  if (!events || !setEvents) return;
-    if (window.confirm('确定要删除该分类吗？相关事件将移至未分类')) {
+    if (!events || !setEvents) return;
+    if (window.confirm("确定要删除该分类吗？相关事件将移至未分类")) {
       // 迁移被删分类的事件到默认分类
-      const updatedEvents = events.map(event => 
-        event.category === categoryToDelete ? { ...event, category: '未分类' } : event
+      const updatedEvents = events.map((event) =>
+        event.category === categoryToDelete
+          ? { ...event, category: "未分类" }
+          : event
       );
       setEvents(updatedEvents);
-      
+
       // 更新分类列表
-      const updatedCategories = categories.filter(cat => cat !== categoryToDelete);
+      const updatedCategories = categories.filter(
+        (cat) => cat !== categoryToDelete
+      );
       setCategories(updatedCategories);
-      
+
       // 更新本地存储
-      localStorage.setItem('events', JSON.stringify(updatedEvents));
-      localStorage.setItem('categories', JSON.stringify(updatedCategories));
+      localStorage.setItem("events", JSON.stringify(updatedEvents));
+      localStorage.setItem("categories", JSON.stringify(updatedCategories));
     }
   };
 
@@ -63,7 +75,7 @@ const CategorySelector = ({ categories, events, setEvents, selectedCategory, onS
           <button
             onClick={() => {
               setIsAdding(false);
-              setNewCategory('');
+              setNewCategory("");
             }}
             className="px-3 py-1 rounded text-sm bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
@@ -74,34 +86,48 @@ const CategorySelector = ({ categories, events, setEvents, selectedCategory, onS
 
       <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => onSelectCategory('all')}
-          className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${selectedCategory === 'all' 
-            ? 'bg-indigo-500 text-white' 
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+          onClick={() => onSelectCategory("all")}
+          className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${
+            selectedCategory === "all"
+              ? "bg-indigo-500 text-white"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+          }`}
         >
           全部
         </button>
         {categories.map((category) => (
-  <div key={category} className="flex items-center gap-1 group">
-    <button
-      onClick={() => onSelectCategory(category)}
-      className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${selectedCategory === category 
-        ? 'bg-indigo-500 text-white' 
-        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-    >
-      {category}
-    </button>
-    <button
-      onClick={() => handleDeleteCategory(category)}
-      className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 p-1 hover:bg-red-100 rounded"
-      title="删除分类"
-    >
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-      </svg>
-    </button>
-  </div>
-))}
+          <div key={category} className="flex items-center gap-1 group">
+            <button
+              onClick={() => onSelectCategory(category)}
+              className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${
+                selectedCategory === category
+                  ? "bg-indigo-500 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              {category}
+            </button>
+            <button
+              onClick={() => handleDeleteCategory(category)}
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-red-500 p-1 hover:bg-red-100 rounded"
+              title="删除分类"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
