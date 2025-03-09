@@ -69,7 +69,3 @@ DEBUG=true npm run dev
 # 运行测试用例
 npm test
 ```
-
-## 许可证
-本项目采用 [ISC License](LICENSE) 授权
-ISC License
