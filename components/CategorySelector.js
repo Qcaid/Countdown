@@ -23,7 +23,6 @@ const CategorySelector = ({
   const handleDeleteCategory = (categoryToDelete) => {
     if (!events || !setEvents) return;
     if (window.confirm("确定要删除该分类吗？相关事件将移至未分类")) {
-      // 迁移被删分类的事件到默认分类
       const updatedEvents = events.map((event) =>
         event.category === categoryToDelete
           ? { ...event, category: "未分类" }
@@ -31,17 +30,22 @@ const CategorySelector = ({
       );
       setEvents(updatedEvents);
 
-      // 更新分类列表
       const updatedCategories = categories.filter(
         (cat) => cat !== categoryToDelete
       );
       setCategories(updatedCategories);
 
-      // 更新本地存储
       localStorage.setItem("events", JSON.stringify(updatedEvents));
       localStorage.setItem("categories", JSON.stringify(updatedCategories));
     }
   };
+
+  const getButtonClass = (category) =>
+    `px-3 py-1 rounded-full text-sm transition-colors duration-200 ${
+      selectedCategory === category
+        ? "bg-indigo-500 text-white"
+        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+    }`;
 
   return (
     <div className="mb-8 bg-white p-4 rounded-lg shadow-md">
@@ -87,11 +91,7 @@ const CategorySelector = ({
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => onSelectCategory("all")}
-          className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${
-            selectedCategory === "all"
-              ? "bg-indigo-500 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
+          className={getButtonClass("all")}
         >
           全部
         </button>
@@ -99,11 +99,7 @@ const CategorySelector = ({
           <div key={category} className="flex items-center gap-1 group">
             <button
               onClick={() => onSelectCategory(category)}
-              className={`px-3 py-1 rounded-full text-sm transition-colors duration-200 ${
-                selectedCategory === category
-                  ? "bg-indigo-500 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
+              className={getButtonClass(category)}
             >
               {category}
             </button>
